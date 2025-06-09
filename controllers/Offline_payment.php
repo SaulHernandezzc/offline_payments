@@ -9,7 +9,7 @@ class Offline_payment extends AdminController
         $this->load->model('offline_payment_model');
 
         $language = $this->config->item('language');
-        if (!file_exists(module_dir_path('offline_payment', "language/$language/offline_payment_lang.php"))) {
+        if (!file_exists(module_dir_path(OFFLINE_PAYMENT_MODULE_NAME, "language/$language/offline_payment_lang.php"))) {
             $language = 'english';
         }
 
@@ -68,12 +68,18 @@ class Offline_payment extends AdminController
     public function settings()
     {
         if ($this->input->post()) {
-            $email = trim($this->input->post('offline_payment_email'));
-            $label_name = trim($this->input->post('paymentmethod_offline_payment_label'));
-update_option('paymentmethod_offline_payment_label', $label_name);
+            $email        = trim($this->input->post('offline_payment_email'));
+            $display_name = trim($this->input->post('offline_payment_display_name'));
+            $label_name   = trim($this->input->post('paymentmethod_offline_payment_label'));
 
+            update_option('paymentmethod_offline_payment_label', $label_name);
             update_option('offline_payment_email', $email);
             update_option('offline_payment_display_name', $display_name);
+
+            $this->db->where('name', 'offline_payment');
+            $this->db->update(db_prefix() . 'paymentgateways', [
+                'display_name' => $display_name,
+            ]);
 
             set_alert('success', _l('offline_payment_settings_updated'));
             redirect(admin_url('offline_payment/settings'), 'refresh');
@@ -89,10 +95,6 @@ update_option('paymentmethod_offline_payment_label', $label_name);
         $data['title'] = _l('offline_payment_settings');
 
         $this->load->view('settings', $data);
-        $this->db->where('name', 'offline_payment');
-$this->db->update(db_prefix() . 'paymentgateways', [
-    'display_name' => $display_name
-]);
     }
 
     public function banks()

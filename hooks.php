@@ -38,7 +38,7 @@ function offline_payment_module_add_admin_menu()
 
 // ✅ REGISTRO DEL MÉTODO DE PAGO COMO GATEWAY
 hooks()->add_filter('app_payment_gateways', function ($gateways) {
-    $path = module_dir_path('offline_payment', 'libraries/Offline_payment_gateway.php');
+    $path = module_dir_path(OFFLINE_PAYMENT_MODULE_NAME, 'libraries/Offline_payment_gateway.php');
 
     if (file_exists($path)) {
         require_once($path);
@@ -80,7 +80,7 @@ hooks()->add_action('app_init', function () {
 hooks()->add_action('app_init_payment_gateways', function () {
     $CI = &get_instance();
 
-    $path = module_dir_path('offline_payment', 'libraries/Offline_payment_gateway.php');
+    $path = module_dir_path(OFFLINE_PAYMENT_MODULE_NAME, 'libraries/Offline_payment_gateway.php');
     if (file_exists($path)) {
         require_once($path);
 
