@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Offline_payment_model extends App_Model
 {
-    protected $table = 'tbl_offline_payments';
+    protected $table = 'tbloffline_payments';
 
     public function __construct()
     {

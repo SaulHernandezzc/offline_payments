@@ -42,7 +42,7 @@ class Offline_payment extends AdminController
             $data['banks'] = $this->offline_payment_model->get_banks();
             $data['title'] = _l('offline_payment');
 
-            $this->load->view('themes/' . active_clients_theme() . '/views/offline_payment_form', $data);
+            $this->load->view(module_views_path(OFFLINE_PAYMENT_MODULE_NAME, 'themes/' . active_clients_theme() . '/offline_payment_form'), $data);
             return;
         }
 
@@ -174,7 +174,7 @@ class Offline_payment extends AdminController
         }
 
         $note = $this->input->post('admin_notes');
-        $updated = $this->db->update('tbl_offline_payments', ['admin_notes' => $note], ['id' => $id]);
+        $updated = $this->db->update('tbloffline_payments', ['admin_notes' => $note], ['id' => $id]);
 
         set_alert($updated ? 'success' : 'danger', $updated ? _l('admin_notes') . ' ' . _l('updated_successfully') : _l('update_failed'));
         redirect(admin_url('offline_payment'), 'refresh');
@@ -224,7 +224,7 @@ class Offline_payment extends AdminController
 
     public function get_payment($id)
     {
-        return $this->db->get_where('tbl_offline_payments', ['id' => $id])->row_array();
+        return $this->db->get_where('tbloffline_payments', ['id' => $id])->row_array();
     }
 
     public function submit()

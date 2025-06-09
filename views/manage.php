@@ -214,7 +214,6 @@
 
 <script>
 $(function(){
-  console.log("DataTable exists:", typeof $.fn.DataTable);
 
   $('#offlinePaymentsTable').DataTable({
     pageLength: 15,
