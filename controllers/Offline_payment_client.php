@@ -33,7 +33,7 @@ class Offline_payment_client extends ClientsController
     $data['banks'] = $this->offline_payment_model->get_banks();
     $data['title'] = _l('offline_payment');
 
-    $this->load->view('themes/' . active_clients_theme() . '/offline_payment_form', $data);
+    $this->load->view(module_views_path(OFFLINE_PAYMENT_MODULE_NAME, 'themes/' . active_clients_theme() . '/offline_payment_form'), $data);
 }
 
     public function submit($invoice_id)
