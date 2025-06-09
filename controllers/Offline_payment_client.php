@@ -9,7 +9,7 @@ class Offline_payment_client extends ClientsController
         $this->load->model('offline_payment_model');
 
         $language = $this->config->item('language');
-        if (!file_exists(module_dir_path('offline_payment', "language/$language/offline_payment_lang.php"))) {
+        if (!file_exists(module_dir_path(OFFLINE_PAYMENT_MODULE_NAME, "language/$language/offline_payment_lang.php"))) {
             $language = 'english';
         }
 

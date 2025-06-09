@@ -45,7 +45,7 @@ class Offline_payment_gateway extends App_gateway
     {
         $this->ci->load->model('offline_payment_model');
 
-        return module_views_path('offline_payment', 'gateway_offline_payment', [
+        return module_views_path(OFFLINE_PAYMENT_MODULE_NAME, 'gateway_offline_payment', [
             'invoice' => $invoice,
             'banks'   => $this->ci->offline_payment_model->get_banks(),
         ]);
